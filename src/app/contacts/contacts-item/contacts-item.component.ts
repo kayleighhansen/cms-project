@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-// import { EventEmitter } from 'stream';
+
 import { Contact } from '../contact.model';
 
 @Component({
@@ -15,7 +15,4 @@ export class ContactsItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  
-
 }
