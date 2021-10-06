@@ -5,16 +5,7 @@
         </div>
 
         <div class="panel-body">
-            <app-contacts-item *ngFor="let contactEl of contacts" [contact]="contactEl"></app-contacts-item>   
-            <!-- <div class="list-group-item" *ngFor="let contact of contacts"> -->
-            <!-- <a href="#" class="list-group-heading clearfix" >
-                
-                    <h4 class="list-group-item-heading pull-left">{{ contact.contactName }}</h4>
-                    <span class="pull-right">
-                        <img src="{{ contact.contactImageUrl }}" alt="{{contact.contactName}}" class="img-responsive" style="max-height: 50px;">
-                    </span>
-            </a> -->
-            <!-- </div> -->
+            <app-contacts-item *ngFor="let contactEl of contacts" [contact]="contactEl" (contactSelected)="onContactSelected(contactEl)"></app-contacts-item>   
 
         </div>
     </div>

@@ -3,10 +3,11 @@
   <main>
   <div class="row">
     <div class="col-md-5">
-      <app-contact-list></app-contact-list>
+      <app-contact-list (contactWasSelected)="selectedContact = $event"></app-contact-list>
     </div>
     <div class="col-md-7">
-      <app-contact-detail></app-contact-detail>
+      <app-contact-detail *ngIf="selectedContact"; else in></app-contact-detail>
+      <ng-template #infoText><p>Please select a Contact</p></ng-template>
     </div>
   </div>
 </main>
