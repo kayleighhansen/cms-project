@@ -13,6 +13,7 @@ import { DocumentItemComponent } from './documents/document-item/document-item.c
 import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
 import { MessageListComponent } from './messages/message-item/message-list.component';
 import { MessageEditComponent } from './messages/message-edit/message-edit.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MessageEditComponent } from './messages/message-edit/message-edit.compo
     DocumentItemComponent,
     DocumentDetailComponent,
     MessageListComponent,
-    MessageEditComponent
+    MessageEditComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule
