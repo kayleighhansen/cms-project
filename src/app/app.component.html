@@ -1,19 +1,7 @@
 <app-header (featureSelected)="onNavigate($event)"></app-header>
-  <main>
-  <div class="row" *ngIf="loadedFeature === 'contact'">
-    <div class="col-md-5">
-      <app-contact-list 
-        (contactWasSelected)="selectedContact = $event">
-      </app-contact-list>
-    </div>
-    <div class="col-md-7">
-      <app-contact-detail
-        *ngIf="selectedContact; else infoText;"
-        [contact]= "selectedContact">
-      </app-contact-detail>
-        <ng-template #infoText><p>Please select a Contact</p></ng-template>
-    </div>
-  </div>
+<main>
+
+  <app-contacts *ngIf="loadedFeature === 'contact'"></app-contacts>
   <app-documents *ngIf="loadedFeature === 'document'"></app-documents>
   <app-messages *ngIf="loadedFeature === 'message'"></app-messages>
 
