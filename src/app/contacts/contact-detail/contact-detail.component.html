@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4></h4>
+        <h4>{{ contact.contactName }}</h4>
         <img src="" alt="" style="max-height: 100px;">
         <div class="pull-right btn-toolbar">
             <button type="button" class="btn btn-primary ">Edit</button>
@@ -9,7 +9,7 @@
     </div>
 
     <div class="panel-body">
-        <p><b>Email:</b> </p>
-        <p><b>Phone:</b> </p>
+        <p><b>Email:</b> {{ contact.contactEmail }}</p>
+        <p><b>Phone:</b> {{ contact.contactPhone }}</p>
     </div>
   </div>

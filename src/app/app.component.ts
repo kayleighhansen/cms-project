@@ -8,6 +8,7 @@ import { Contact } from './contacts/contact.model';
 })
 
 export class AppComponent {
+  selectedContact: Contact;
   
   constructor() {}
 
