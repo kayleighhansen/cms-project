@@ -1,5 +1,4 @@
 import { identifierModuleUrl } from "@angular/compiler"
-//import { Console } from "console"
 
 export class Contact {
     public contactId : number;
