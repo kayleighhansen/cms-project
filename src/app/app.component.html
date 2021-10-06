@@ -1,6 +1,6 @@
-<app-header></app-header>
+<app-header (featureSelected)="onNavigate($event)"></app-header>
   <main>
-  <div class="row">
+  <div class="row" *ngIf="loadedFeature === 'contact'">
     <div class="col-md-5">
       <app-contact-list 
         (contactWasSelected)="selectedContact = $event">
@@ -8,10 +8,13 @@
     </div>
     <div class="col-md-7">
       <app-contact-detail
-        *ngIf="selectedContact; else infoText"
+        *ngIf="selectedContact; else infoText;"
         [contact]= "selectedContact">
       </app-contact-detail>
         <ng-template #infoText><p>Please select a Contact</p></ng-template>
     </div>
   </div>
+  <app-documents *ngIf="loadedFeature === 'document'"></app-documents>
+  <app-messages *ngIf="loadedFeature === 'message'"></app-messages>
+
 </main>
