@@ -1,5 +1,5 @@
-export class Contact {
-    
+export class Message {
+
     public messageId : number;
     public messageSubject : string;
     public messageText : string;
