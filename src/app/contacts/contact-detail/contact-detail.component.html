@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4>{{ contact.contactName }}</h4>
-        <img src="" alt="" style="max-height: 100px;">
+        <h4>Name: {{ contact.contactName }}</h4>
+        <img src="{{ contact.contactImageUrl }}" alt="{{ contact.contactName }}" style="max-height: 100px;">
         <div class="pull-right btn-toolbar">
             <button type="button" class="btn btn-primary ">Edit</button>
             <button type="button" class="btn btn-danger">Delete</button>
