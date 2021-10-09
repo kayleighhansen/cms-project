@@ -15,11 +15,11 @@ export class ContactListComponent implements OnInit {
   ];
 
   constructor() { }
-
+ 
   ngOnInit(): void {
-  }
+  } 
 
-  onContactSelected(contact: Contact) {
+  onContactSelected(contact: Contact) { 
     this.contactWasSelected.emit(contact);
   }
 }

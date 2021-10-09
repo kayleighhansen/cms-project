@@ -9,7 +9,7 @@ import { Contact } from './contacts/contact.model';
 
 export class AppComponent {
   selectedContact: Contact;
-  loadedFeature = 'message';
+  loadedFeature = 'contact';
 
   onNavigate(feature: string) {
     this.loadedFeature = feature;

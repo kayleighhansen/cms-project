@@ -9,13 +9,15 @@
           <div class="panel-body">
              <div class="row">
                 <div class="col-xs-12">
-                   <!--Add tag to load the MessageItemComponent-->
+                    <app-message-item *ngFor="let messageEl of messages" 
+                    [message]="messageEl" 
+                    (messageSelected)="onMessageSelected(messageEl)"></app-message-item>                
                 </div>
              </div>
           </div>
           <div class="panel-footer">
-             <!--Add tag to load the MessageEditComponent-->
+             <app-message-edit (messageAdded)="onMessageAdded($event)"></app-message-edit>
           </div>
        </div>
-    </div>
+    </div> 
  </div>
