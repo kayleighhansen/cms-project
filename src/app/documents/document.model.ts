@@ -1,4 +1,4 @@
-export class Contact {
+export class Document {
     public documentId : number;
     public documentName : string;
     public documentDescription : string;
