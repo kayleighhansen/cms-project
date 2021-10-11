@@ -1,17 +1,13 @@
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>Contacts</h4>
-            <button class="btn-success pull-right btn" style="margin-top: -35px">New Contact</button>
-        </div>
-
-        <div class="panel-body">
-            <app-contacts-item 
-                *ngFor="let contactEl of contacts" 
-                [contact]="contactEl" 
-                (contactSelected)="onContactSelected(contactEl)">
-            </app-contacts-item>   
-
-        </div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Contacts</h4>
+        <button class="btn-success pull-right btn" style="margin-top: -35px">New Contact</button>
     </div>
 
+    <div class="panel-body">
+        <app-contacts-item *ngFor="let contactEl of contacts" [contact]="contactEl"
+            (contactSelected)="onContactSelected(contactEl)">
+        </app-contacts-item>
 
+    </div>
+</div>
