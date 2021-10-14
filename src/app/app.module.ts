@@ -32,7 +32,7 @@ import { DropdownDirective } from './dropdown.directive';
     MessageListComponent,
     MessageItemComponent,
     DropdownDirective,
-  ],
+  ], 
   imports: [
     BrowserModule
   ],
