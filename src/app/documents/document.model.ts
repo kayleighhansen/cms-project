@@ -1,21 +1,20 @@
 export class Document {
-    public documentId : number;
-    public documentName : string;
-    public documentDescription : string;
-    public documentUrl : string;
-    public documentChildren : string;
+    public id : string;
+    public name : string;
+    public description : string;
+    public url : string;
+    public children : Document[];
 
-    constructor(id: number, 
+    constructor(id: string, 
                 name: string, 
                 description: string,
                 url: string, 
-                children: string){
+                children: Document[]){
 
-        this.documentId = id;
-        this.documentName = name;
-        this.documentDescription = description;
-        this.documentUrl = url;
-        this.documentChildren = children;
-
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.url = url;
+        this.children = children;
     };
 }
