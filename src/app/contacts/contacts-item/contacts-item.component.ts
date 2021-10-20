@@ -6,19 +6,17 @@ import { ContactService } from '../contact.service';
   selector: 'app-contacts-item',
   templateUrl: './contacts-item.component.html',
   styleUrls: ['./contacts-item.component.css'],
-  providers: [ ContactService ]
 })
 
 export class ContactsItemComponent implements OnInit {
-  contacts: Contact[] = [];
+  @Input() contact: Contact;
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
-    this.contacts = this.contactService.getContacts();
   }
 
   onSelected() {
-    this.contactService.contactSelectedEvent.emit();
+    this.contactService.contactSelectedEvent.emit(this.contact);
   } 
 }
