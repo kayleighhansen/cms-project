@@ -13,12 +13,6 @@ export class ContactDetailComponent implements OnInit {
   constructor(private contactService: ContactService) { }
 
   ngOnInit(): void {
-
-    // DEBUG
-    //console.log("detail");
-    //this.contact = this.contactService.getContact(this.contact.id);
-
-    console.log("Contact");
   }
 
 }
