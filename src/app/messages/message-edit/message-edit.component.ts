@@ -14,7 +14,7 @@ export class MessageEditComponent implements OnInit {
 
   constructor(private messageService: MessageService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
   } 
 
   onSendMessage() {
@@ -30,7 +30,7 @@ export class MessageEditComponent implements OnInit {
 
     this.messageService.addMessage(message);
 
-    this.onClear;
+    this.onClear();
   }
 
   onClear() {

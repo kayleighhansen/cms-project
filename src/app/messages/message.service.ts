@@ -14,7 +14,6 @@ export class MessageService {
   }
 
   addMessage(message : Message) {
-
     console.log(message);
     this.messages.push(message);
     this.messagesAdded.emit(this.messages.slice());
