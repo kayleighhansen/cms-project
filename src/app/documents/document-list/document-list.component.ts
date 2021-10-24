@@ -9,13 +9,13 @@ import { DocumentService } from '../document.service';
 })
 export class DocumentListComponent implements OnInit {
   documents: Document[];
+  documentId: string = '';
 
-  //@Output() documentWasSelected = new EventEmitter<Document>();
-
-  constructor(private documentService: DocumentService) { }
+  constructor(private documentService: DocumentService) { 
+    this.documents = this.documentService.getDocuments();
+  }
 
   ngOnInit(): void {
-    this.documents = this.documentService.getDocuments();
   } 
 
   onDocumentSelected(document: Document) { 

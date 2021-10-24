@@ -20,9 +20,7 @@ export class DocumentService {
     .slice();
   }
 
-  getDocument(id: string): Document {
-    return this.documents.find((document) => document.id === id)
+  getDocument(index: number){
+    return this.documents.slice()[index];
   }
-
-  
 }

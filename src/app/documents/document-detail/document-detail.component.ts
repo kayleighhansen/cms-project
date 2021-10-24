@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Document } from '../document.model';
 import { DocumentService } from '../document.service';
 
@@ -9,10 +10,16 @@ import { DocumentService } from '../document.service';
 })
 export class DocumentDetailComponent implements OnInit {
   @Input() document: Document;
+  id: number;
 
-  constructor(private documentService: DocumentService) { }
+  constructor(private documentService: DocumentService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.params
+      .subscribe((params: Params) => {
+        this.id = +params['id'];
+        this.document = this.documentService.getDocument(this.id);
+      }
+    );
   } 
-
 } 
