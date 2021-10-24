@@ -8,7 +8,7 @@ import { ContactService } from './contact.service';
   styleUrls: ['/contacts.component.css'],
   providers: [ ContactService ]
 })
-
+ 
 export class ContactsComponent implements OnInit{
   selectedContact: Contact;
 
