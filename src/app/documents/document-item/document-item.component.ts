@@ -13,7 +13,7 @@ export class DocumentItemComponent implements OnInit {
   @Input() index: number;
  
   constructor(private documentService: DocumentService) { }
-
+ 
   ngOnInit() {
   }
 
