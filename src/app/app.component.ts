@@ -10,10 +10,5 @@ import { ContactService } from './contacts/contact.service';
 })
 
 export class AppComponent {
-  selectedContact: Contact;
-  loadedFeature = 'contact';
 
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
-  }
 }
