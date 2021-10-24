@@ -18,6 +18,7 @@ import { DropdownDirective } from './dropdown.directive';
 import { RouterModule, Routes } from '@angular/router';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MessageItemComponent,
     DropdownDirective,
     DocumentEditComponent,
+    ContactEditComponent,
   ], 
   imports: [
     BrowserModule,

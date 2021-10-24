@@ -20,7 +20,7 @@ export class DocumentService {
     .sort((a,b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0)
     .slice();
   }
-
+ 
   getDocument(index: number){
     return this.documents.slice()[index];
   }

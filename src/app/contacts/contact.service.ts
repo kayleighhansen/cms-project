@@ -9,18 +9,36 @@ export class ContactService {
   private contacts: Contact[] = [];
 
   contactSelectedEvent = new EventEmitter<Contact>();
+  contactChangedEvent = new EventEmitter();
+
 
   constructor() { 
     this.contacts = MOCKCONTACTS;
   }
 
-  getContacts(): Contact[] {
+  getContacts() {
     return this.contacts
     .sort((a,b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0)
     .slice();
   }
-
+ 
   getContact(id: string): Contact {
     return this.contacts.find((contact) => contact.id === id)
   } 
+
+  getContactByIndex(index: number) {
+    return this.contacts.slice()[index];
+  }
+
+  deleteDocument(contact: Contact) {
+    if (!contact) {
+       return;
+    }
+    const pos = this.contacts.indexOf(contact);
+    if (pos < 0) {
+       return;
+    }
+    this.contacts.splice(pos, 1);
+    this.contactChangedEvent.emit(this.contacts.slice());
+ }
 }
