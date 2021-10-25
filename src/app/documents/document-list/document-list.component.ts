@@ -9,13 +9,13 @@ import { DocumentService } from '../document.service';
 })
 export class DocumentListComponent implements OnInit {
   documents: Document[];
-  documentId: string = '';
 
   constructor(private documentService: DocumentService) { 
     this.documents = this.documentService.getDocuments();
-  }
-
+  } 
+ 
   ngOnInit(): void {
+    
   } 
 
   onDocumentSelected(document: Document) { 

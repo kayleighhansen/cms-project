@@ -3,10 +3,10 @@
         <h4>Name: {{ contact.name }}</h4>
         <img src="{{ contact.imageUrl }}" alt="{{ contact.name }}" style="max-height: 100px;">
         <div class="pull-right btn-toolbar">
-            <button type="button" class="btn btn-primary">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-primary" routerLink="edit">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
         </div>
-    </div>
+    </div>  
 
     <div class="panel-body">
         <p><b>Email:</b> {{ contact.email }}</p>

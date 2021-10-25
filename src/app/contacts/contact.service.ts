@@ -30,7 +30,7 @@ export class ContactService {
     return this.contacts.slice()[index];
   }
 
-  deleteDocument(contact: Contact) {
+  deleteContact(contact: Contact) {
     if (!contact) {
        return;
     }

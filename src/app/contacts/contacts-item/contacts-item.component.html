@@ -1,5 +1,5 @@
 <div class="list-group-item" >
-    <a class="list-group-heading clearfix" (click)="onSelected()">
+    <a class="list-group-heading clearfix" [routerLink]="[index]" style="cursor: pointer;">
         <h4 class="list-group-item-heading pull-left">{{ contact.name }}</h4>
         <span class="pull-right">
             <img src="{{ contact.imageUrl }}" alt="{{ contact.name }}" class="img-responsive" style="max-height: 50px;">
