@@ -7,9 +7,9 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
 })
 export class ContactService {
   private contacts: Contact[] = [];
-
+ 
   contactSelectedEvent = new EventEmitter<Contact>();
-  contactChangedEvent = new EventEmitter();
+  contactChangedEvent = new EventEmitter<Contact[]>();
 
 
   constructor() { 

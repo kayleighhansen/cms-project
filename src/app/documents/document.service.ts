@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Document } from '../documents/document.model';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 
