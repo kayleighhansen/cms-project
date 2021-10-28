@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
  
 export class DocumentDetailComponent implements OnInit {
   @Input() document: Document;
-  id: string;
+  id: string; 
 
   nativeWindow: any;
 

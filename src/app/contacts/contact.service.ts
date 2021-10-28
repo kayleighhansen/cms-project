@@ -9,7 +9,7 @@ export class ContactService {
   private contacts: Contact[] = [];
  
   contactSelectedEvent = new EventEmitter<Contact>();
-  contactChangedEvent = new EventEmitter<Contact[]>();
+  contactChanged = new EventEmitter<Contact[]>();
 
 
   constructor() { 
@@ -26,10 +26,10 @@ export class ContactService {
     return this.contacts.find((contact) => contact.id === id)
   } 
 
-  getContactByIndex(index: number) {
-    return this.contacts.slice()[index];
-  }
-
+  // getContactByIndex(index: number) {
+  //   return this.contacts.slice()[index];
+  // }
+ 
   deleteContact(contact: Contact) {
     if (!contact) {
        return;
@@ -39,6 +39,6 @@ export class ContactService {
        return;
     }
     this.contacts.splice(pos, 1);
-    this.contactChangedEvent.emit(this.contacts.slice());
+    this.contactChanged.next(this.contacts.slice());
  }
 }

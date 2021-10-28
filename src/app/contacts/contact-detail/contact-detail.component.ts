@@ -11,15 +11,17 @@ import { ActivatedRoute, Params } from '@angular/router';
 }) 
 export class ContactDetailComponent implements OnInit {
   @Input() contact: Contact;
-  id: number;
+  id: string;
 
-  constructor(private contactService: ContactService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private contactService: ContactService, 
+              private router: Router, 
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params
     .subscribe((params: Params) => {
-      this.id = +params['id'];
-      this.contact = this.contactService.getContactByIndex(this.id);
+      this.id = params['id'];
+      this.contact = this.contactService.getContact(this.id);
     }
   );
   }
