@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
  
 export class DocumentDetailComponent implements OnInit {
   @Input() document: Document;
-  id: number;
+  id: string;
 
   nativeWindow: any;
 
@@ -28,7 +28,7 @@ export class DocumentDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .subscribe((params: Params) => {
-        this.id = +params['id'];
+        this.id = params['id'];
         this.document = this.documentService.getDocument(this.id);
       }
     );
