@@ -6,15 +6,17 @@ import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 @Injectable({
   providedIn: 'root' 
 })
+ 
 export class DocumentService {
   private documents: Document[] = [];
+  maxDocumentId:number;
 
   documentSelectedEvent = new EventEmitter<Document>();
-
-  documentChanged = new Subject<Document[]>();
+  documentListChanged = new Subject<Document[]>();
 
   constructor() { 
     this.documents = MOCKDOCUMENTS;
+    this.maxDocumentId = this.getMaxId();
   }
 
   getDocuments() {
@@ -36,6 +38,49 @@ export class DocumentService {
        return;
     }
     this.documents.splice(pos, 1);
-    this.documentChanged.next(this.documents.slice());
+    this.documentListChanged.next(this.documents.slice());
  }
+
+  getMaxId(): number {
+    var maxId = 0
+
+    this.documents.forEach(document => {
+      var currentId = parseInt(document.id);
+      if (currentId > maxId) {
+        maxId = currentId;
+      }
+    }); 
+
+    return maxId
+  }
+
+  addDocument(newDocument: Document) {
+    if (newDocument == null) {
+      return;
+    }
+
+    this.maxDocumentId++;
+    newDocument.id = this.maxDocumentId.toString();
+
+    this.documents.push(newDocument);
+    const documentsListClone = this.documents.slice();
+    this.documentListChanged.next(documentsListClone);
+  }
+
+  updateDocument(originalDocument: Document, newDocument: Document) {
+
+    if(originalDocument == null || newDocument == null){
+      return;
+    }
+    
+    const pos = this.documents.indexOf(originalDocument);
+
+    if(pos < 0) {
+      return;
+    }
+    newDocument.id = originalDocument.id;
+    this.documents[pos] = newDocument;
+    const documentsListClone = this.documents.slice();
+    this.documentListChanged.next(documentsListClone);
+  }
 }

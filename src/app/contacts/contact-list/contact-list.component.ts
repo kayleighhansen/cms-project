@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
 import { Subscription } from 'rxjs';
@@ -14,20 +14,22 @@ export class ContactListComponent implements OnInit {
   private contactChangeSub: Subscription;
 
   constructor(private contactService: ContactService) { 
-    //this.contacts = this.contactService.getContacts();
   }
    
   ngOnInit(): void {
     this.contacts = this.contactService.getContacts();
-    this.contactChangeSub = this.contactService.contactChanged.subscribe(
+    this.contactChangeSub = this.contactService.contactListChanged.subscribe(
       (contacts: Contact[]) => {
         this.contacts = contacts;
       }
     );
-    
   } 
 
   onContactSelected(contact: Contact) { 
     this.contactService.contactSelectedEvent.emit(contact);
+  }
+
+  ngOnDestroy(): void {
+    this.contactChangeSub.unsubscribe();
   }
 }
