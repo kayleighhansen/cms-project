@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './document-list.component.html',
   styleUrls: ['./document-list.component.css']
 })
+
 export class DocumentListComponent implements OnInit, OnDestroy {
   documents: Document[];
   private documentChangeSub: Subscription;
