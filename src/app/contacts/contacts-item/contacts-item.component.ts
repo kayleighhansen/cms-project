@@ -10,7 +10,7 @@ import { ContactService } from '../contact.service';
 
 export class ContactsItemComponent implements OnInit {
   @Input() contact: Contact;
-  @Input() index: number;
+  //@Input() index: number;
 
   constructor(private contactService: ContactService) { }
  
@@ -20,4 +20,5 @@ export class ContactsItemComponent implements OnInit {
   onSelected() {
     this.contactService.contactSelectedEvent.emit(this.contact);
   }  
+  
 }
