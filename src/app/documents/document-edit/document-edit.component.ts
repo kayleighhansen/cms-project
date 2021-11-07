@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Document } from '../document.model';
 import { NgForm } from '@angular/forms';
+import { DocumentService } from '../document.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-document-edit',
@@ -14,9 +16,14 @@ export class DocumentEditComponent implements OnInit {
   document: Document;
   editMode: boolean = false;
 
-  constructor() { }
+  constructor(private documentService: DocumentService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    //route.subscribe()
+
   }
 
   // onSubmit(form: NgForm) {

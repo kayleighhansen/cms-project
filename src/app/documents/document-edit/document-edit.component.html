@@ -11,11 +11,10 @@
               class="form-control"
               size="120"
               max="120"
-              ngModel
-              name="name"
-              [ngModel]=document?.name
+              [ngModel]="document?.name"
+              #name
               required
-              #name>
+            />
           </div>
         </div>
   
@@ -28,11 +27,8 @@
               class="form-control"
               size="120"
               max="255"
-              ngModel
-              name="description"
-              [ngModel]=document?.description
-              required
-              #description>
+              [ngModel]="document?.description"
+              #name/>
           </div>
         </div>
   
@@ -40,27 +36,25 @@
           <div class="col-sm-12 form-group">
             <label for="url">Document URL: </label>
             <input
-              type="text"
+              type="url"
               id="url"
               class="form-control"
               size="150"
               max="255"
-              ngModel
-              name="url"
-              [ngModel]=document?.url
-              required
-              #url>
+              [ngModel]="document?.url"
+              #url
+              required/>
           </div>
         </div>
 
-        <div class="warning message">
-            <p>The Document Title and Document URL are required.</p>
+        <div class="alert alert-danger" *ngIf="(url.invalid && url.touched) || (name.invalid && name.touched)">
+            The Document Title and Document URL are required.
         </div>
   
         <div class="row">
           <div class="col-xs-12 btn-toolbar">
-            <button class="btn btn-success" type="submit" >Save</button>
-            <button class="btn btn-primary" type="button"ç>Cancel</button>
+            <button class="btn btn-success" type="submit" [disabled]="f.invalid">Save</button>
+            <button class="btn btn-primary" type="button">Cancel</button>
           </div>
         </div>
   
