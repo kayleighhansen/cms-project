@@ -4,7 +4,8 @@
         <button class="btn-success pull-right btn" style="margin-top: -35px" routerLink="new">New Contact</button>
     </div>
     <div class="panel-body">
-        <app-contacts-item *ngFor="let contactEl of contacts; let i = index" [contact]="contactEl" [index]="i">
+        <app-contacts-item *ngFor="let contactEl of contacts;" [contact]="contactEl" 
+                            dnd-draggable [dragEnabled]="true" [dragData]="contact" [dropZones]="['contactGroup']">
         </app-contacts-item>
     </div>
 </div>
