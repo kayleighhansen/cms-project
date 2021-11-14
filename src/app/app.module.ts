@@ -21,6 +21,7 @@ import { DocumentEditComponent } from './documents/document-edit/document-edit.c
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { DndModule, DragDropConfig } from 'ng2-dnd';
+import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DndModule, DragDropConfig } from 'ng2-dnd';
     DropdownDirective,
     DocumentEditComponent,
     ContactEditComponent,
+    ContactsFilterPipe,
   ], 
   imports: [
     BrowserModule,

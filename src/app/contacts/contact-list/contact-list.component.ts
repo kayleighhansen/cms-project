@@ -13,6 +13,8 @@ export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
   private contactChangeSub: Subscription;
 
+  term: string;
+
   constructor(private contactService: ContactService) { 
   }
    
@@ -27,6 +29,11 @@ export class ContactListComponent implements OnInit {
 
   onContactSelected(contact: Contact) { 
     this.contactService.contactSelectedEvent.emit(contact);
+  }
+
+
+  search(value: string) {
+    this.term = value;
   }
 
   ngOnDestroy(): void {
