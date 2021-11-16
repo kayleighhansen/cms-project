@@ -68,7 +68,7 @@ export class DocumentService {
        return;
     }
     this.documents.splice(pos, 1);
-    this.documentListChanged.next(this.documents.slice());
+    this.storeDocuments();
  }
 
   getMaxId(): number {
@@ -107,7 +107,8 @@ export class DocumentService {
 
     this.documents.push(newDocument);
     const documentsListClone = this.documents.slice();
-    this.documentListChanged.next(documentsListClone);
+
+    this.storeDocuments();
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
@@ -124,6 +125,7 @@ export class DocumentService {
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
     const documentsListClone = this.documents.slice();
-    this.documentListChanged.next(documentsListClone);
+
+    this.storeDocuments();
   }
 }
