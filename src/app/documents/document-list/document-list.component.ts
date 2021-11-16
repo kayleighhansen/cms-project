@@ -10,20 +10,32 @@ import { Subscription } from 'rxjs';
 })
 
 export class DocumentListComponent implements OnInit, OnDestroy {
-  documents: Document[];
+
+  documents: Document[] = [];
+  isFetching: boolean;
+
+  fetchDocumentsSubscription: Subscription;
   private documentChangeSub: Subscription;
 
   constructor(private documentService: DocumentService) { 
   } 
  
   ngOnInit() {
-    this.documents = this.documentService.getDocuments();
-    this.documentChangeSub = this.documentService.documentListChanged.subscribe(
-      (documents: Document[]) => {
-        this.documents = documents;
-      }
-    );
+    this.LoadDocuments();
   } 
+
+  LoadDocuments() {
+    const list = this.documentService.fetchDocuments();
+
+    this.isFetching = true;
+
+    this.fetchDocumentsSubscription = this.documentService.fetchDocumentsEvent.subscribe((result)=> {
+      this.isFetching = false;
+
+      this.documents = result;
+
+    });
+  }
 
   onDocumentSelected(document: Document) { 
     this.documentService.documentSelectedEvent.emit(document);

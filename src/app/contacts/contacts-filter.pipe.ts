@@ -4,6 +4,7 @@ import { Contact } from './contact.model';
 @Pipe({
   name: 'contactsFilter'
 })
+
 export class ContactsFilterPipe implements PipeTransform {
 
   transform(contacts: Contact[], term) { 

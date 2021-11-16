@@ -6,7 +6,7 @@
         <div class="row">
           <div class="input-group pull-left pad-left-right col-xs-7">
             <!-- Add the search box input field here -->
-            <input type="text" #searchBox (keyup)="search(searchBox.value)" class="form-control" placeholder="Enter a search value">
+            <input type="text" (keyup)="search(searchBox.value)" class="form-control" placeholder="Enter a search value" [(ngModel)]="search" #searchBox>
             <div class="glyphicon glyphicon-search input-group-addon"></div>
           </div>
           <div class="pull-right pad-left-right">
@@ -15,7 +15,7 @@
         </div>
       </div>
     <div class="panel-body">
-        <app-contacts-item *ngFor="let contactEl of contacts;" [contact]="contactEl" 
+        <app-contacts-item *ngFor="let contactEl of contacts |  contactsFilter: search: 'name';" [contact]="contactEl" 
                             dnd-draggable [dragEnabled]="true" [dragData]="contactEl" [dropZones]="['contactGroup']">
         </app-contacts-item>
     </div>

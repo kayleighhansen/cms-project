@@ -2,21 +2,51 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { Document } from '../documents/document.model';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root' 
 })
  
 export class DocumentService {
-  private documents: Document[] = [];
-  maxDocumentId:number;
 
   documentSelectedEvent = new EventEmitter<Document>();
   documentListChanged = new Subject<Document[]>();
+  fetchDocumentsEvent = new Subject<Document[]>();
 
-  constructor() { 
-    this.documents = MOCKDOCUMENTS;
+  private documents: Document[] = [];
+  maxDocumentId: number;
+
+
+  constructor(private http: HttpClient) { 
     this.maxDocumentId = this.getMaxId();
+  }
+
+  fetchDocuments() {
+    this.http
+      .get<Document[]>('https://cms-project-3527d-default-rtdb.firebaseio.com/documents.json')
+      .pipe(
+        map(responseData => {
+          const postsArray = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postsArray.push({ ...responseData[key], id: key})
+            }
+          }
+          return postsArray;
+        })
+      )
+      .subscribe(
+        (documents: Document[]) => {
+        this.documents = documents;
+        this.fetchDocumentsEvent.next(this.documents);
+      },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    return;
   }
 
   getDocuments() {
@@ -52,6 +82,19 @@ export class DocumentService {
     }); 
 
     return maxId
+  }
+
+  storeDocuments() {
+    let documents = JSON.stringify(this.documents);
+
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    this.http.put('https://cms-project-3527d-default-rtdb.firebaseio.com/documents.json', headers)
+      .subscribe(
+        () => {
+          this.documentListChanged.next(this.documents.slice());
+        }
+      );
   }
 
   addDocument(newDocument: Document) {

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
@@ -48,6 +49,7 @@ import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
     AppRoutingModule,
     FormsModule,
     DndModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
