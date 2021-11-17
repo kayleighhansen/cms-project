@@ -48,7 +48,7 @@ export class DocumentService {
     }
     this.documents.splice(pos, 1);
     this.storeDocuments();
- }
+  }
 
   getMaxId(): number {
     var maxId = 0

@@ -19,17 +19,17 @@ export class DocumentEditComponent implements OnInit {
   constructor(private documentService: DocumentService,
               private router: Router,
               private route: ActivatedRoute) { }
-
-  ngOnInit() {
-
+ 
+  ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
-        if(!this.id) {
-
+        const id = params['id'];
+        if(!id) {
           this.editMode = false;
           return;
         }
 
+        this.originalDocument = this.documentService.getDocument(id);
         this.editMode = true;
         this.document = JSON.parse(JSON.stringify(this.originalDocument));
       });
