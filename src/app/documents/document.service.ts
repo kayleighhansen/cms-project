@@ -22,7 +22,7 @@ export class DocumentService {
     this.maxDocumentId = this.getMaxId();
   }
 
-  fetchDocuments() {
+  getDocuments() {
     this.http.get('https://cms-project-3527d-default-rtdb.firebaseio.com/documents.json').subscribe((result: any) => {
       this.documents = result;
       this.maxDocumentId = this.getMaxId();
@@ -32,12 +32,6 @@ export class DocumentService {
         this.documentListChanged.next(this.documents.slice());
       },
     );
-  }
-
-  getDocuments() {
-    return this.documents
-    .sort((a,b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0)
-    .slice();
   }
  
   getDocument(id: string){

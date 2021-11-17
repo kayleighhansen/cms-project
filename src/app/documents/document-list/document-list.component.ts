@@ -25,7 +25,7 @@ export class DocumentListComponent implements OnInit, OnDestroy {
   } 
 
   LoadDocuments() {
-    const list = this.documentService.fetchDocuments();
+    const list = this.documentService.getDocuments();
 
     this.isFetching = true;
 
