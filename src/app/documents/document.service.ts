@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { Document } from '../documents/document.model';
-import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
@@ -24,29 +23,15 @@ export class DocumentService {
   }
 
   fetchDocuments() {
-    this.http
-      .get<Document[]>('https://cms-project-3527d-default-rtdb.firebaseio.com/documents.json')
-      .pipe(
-        map(responseData => {
-          const postsArray = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              postsArray.push({ ...responseData[key], id: key})
-            }
-          }
-          return postsArray;
-        })
-      )
-      .subscribe(
-        (documents: Document[]) => {
-        this.documents = documents;
-        this.fetchDocumentsEvent.next(this.documents);
+    this.http.get('https://cms-project-3527d-default-rtdb.firebaseio.com/documents.json').subscribe((result: any) => {
+      this.documents = result;
+      this.maxDocumentId = this.getMaxId();
+
+      this.documents.sort((a , b) => 
+        a.name > b.name ? 1 : b.name > a.name ? -1 : 0);
+        this.documentListChanged.next(this.documents.slice());
       },
-        (error: any) => {
-          console.log(error);
-        }
-      );
-    return;
+    );
   }
 
   getDocuments() {

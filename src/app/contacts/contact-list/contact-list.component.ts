@@ -19,7 +19,7 @@ export class ContactListComponent implements OnInit {
   }
    
   ngOnInit(): void {
-    this.contacts = this.contactService.getContacts();
+    this.contactService.getContacts();
     this.contactChangeSub = this.contactService.contactListChanged.subscribe(
       (contacts: Contact[]) => {
         this.contacts = contacts;
@@ -30,8 +30,7 @@ export class ContactListComponent implements OnInit {
   onContactSelected(contact: Contact) { 
     this.contactService.contactSelectedEvent.emit(contact);
   }
-
-
+  
   search(value: string) {
     this.term = value;
   }
