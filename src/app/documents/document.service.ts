@@ -66,9 +66,9 @@ export class DocumentService {
   storeDocuments() {
     let documents = JSON.stringify(this.documents);
 
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-    this.http.put('https://cms-project-3527d-default-rtdb.firebaseio.com/documents.json', headers)
+    const documentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+ 
+    this.http.put('https://cms-project-3527d-default-rtdb.firebaseio.com/documents.json', documents, {headers: documentHeaders})
       .subscribe(
         () => {
           this.documentListChanged.next(this.documents.slice());

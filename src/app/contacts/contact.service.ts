@@ -101,10 +101,10 @@ export class ContactService {
     let contactHeader = new HttpHeaders({"Content-Type" : "application/json" });
 
     this.http.put('https://cms-project-3527d-default-rtdb.firebaseio.com/contacts.json', contacts, {headers: contactHeader})
-      .subscribe(() => {this.contactListChanged.next(this.contacts.slice())});
-  }
-
-  fetchContacts() {
-    
+      .subscribe(
+        () => {
+          this.contactListChanged.next(this.contacts.slice())
+        }
+      );
   }
 }
