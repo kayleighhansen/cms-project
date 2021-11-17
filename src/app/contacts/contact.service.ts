@@ -2,6 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Subject, Subscription } from 'rxjs';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +17,21 @@ export class ContactService {
   contactListChanged = new Subject<Contact[]>();
 
 
-  constructor() { 
-    this.contacts = MOCKCONTACTS;
-    this.maxContactId = this.getMaxId();
+  constructor(private http: HttpClient) { 
+    //this.contacts = MOCKCONTACTS;
+    //this.maxContactId = this.getMaxId();
   }
 
   getContacts() {
-    return this.contacts
-    .sort((a,b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0)
-    .slice();
+    this.http.get('https://cms-project-3527d-default-rtdb.firebaseio.com/contacts.json').subscribe((result: any) => {
+      this.contacts = result;
+      this.maxContactId = this.getMaxId();
+
+      this.contacts.sort((a , b) => 
+        a.name > b.name ? 1 : b.name > a.name ? -1 : 0);
+        this.contactListChanged.next(this.contacts.slice());
+      },
+    );
   }
  
   getContact(id: string): Contact {
@@ -66,6 +74,8 @@ export class ContactService {
     this.contacts.push(newContact);
     const contactsListClone = this.contacts.slice();
     this.contactListChanged.next(contactsListClone);
+
+    this.storeContact();
   }
 
   updateContact(originalContact: Contact, newContact: Contact) {
@@ -81,7 +91,20 @@ export class ContactService {
     }
     newContact.id = originalContact.id;
     this.contacts[pos] = newContact;
-    const contactsListClone = this.contacts.slice();
-    this.contactListChanged.next(contactsListClone);
+
+    this.storeContact();
+  }
+
+  storeContact() {
+    let contacts = JSON.stringify(this.contacts);
+
+    let contactHeader = new HttpHeaders({"Content-Type" : "application/json" });
+
+    this.http.put('https://cms-project-3527d-default-rtdb.firebaseio.com/contacts.json', contacts, {headers: contactHeader})
+      .subscribe(() => {this.contactListChanged.next(this.contacts.slice())});
+  }
+
+  fetchContacts() {
+    
   }
 }

@@ -26,12 +26,13 @@ export class ContactEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
-        if(!this.id) {
-
+        const id = params['id'];
+        if(!id) {
           this.editMode = false;
           return;
         }
 
+        this.originalContact = this.contactService.getContact(id);
         this.editMode = true;
         this.contact = JSON.parse(JSON.stringify(this.originalContact));
       });
