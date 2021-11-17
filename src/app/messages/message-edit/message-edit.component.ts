@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Message } from '../message.model';
 import { MessageService } from '../message.service';
 
@@ -8,33 +10,43 @@ import { MessageService } from '../message.service';
   styleUrls: ['./message-edit.component.css']
 })
 export class MessageEditComponent implements OnInit {
-  @ViewChild('subjectInput') subjectInputRef: ElementRef;
-  @ViewChild('textInput') textInputRef: ElementRef;
-  currentSender = '1';
 
-  constructor(private messageService: MessageService) { }
+  originalMessage: Message;
+  message: Message;
+  editMode: boolean = false;
+  id: string;
+
+  constructor(private messageService: MessageService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void { 
+    this.route.params.subscribe(
+      (params: Params) => {
+        const id = params['id'];
+        if(!id) {
+          this.editMode = false;
+          return;
+        }
+
+        this.originalMessage = this.messageService.getMessage(id);
+        this.editMode = true;
+        this.message = JSON.parse(JSON.stringify(this.originalMessage));
+      });
   } 
+ 
+  onSubmit(form: NgForm) {
+    const value = form.value;
+    const newMessage = new Message(
+      "",
+      value.name,
+      value.description,
+      value.url,
+    );
 
-  onSendMessage() {
+    this.messageService.addMessage(newMessage);
 
-    const subjectValue = this.subjectInputRef.nativeElement.value;
-    const msgTextValue = this.textInputRef.nativeElement.value;
-
-    const message = new Message(
-      '1',
-      subjectValue,
-      msgTextValue,
-      this.currentSender);
-
-    this.messageService.addMessage(message);
-
-    this.onClear();
+    this.router.navigate(['/message']);
   }
 
-  onClear() {
-    this.subjectInputRef.nativeElement.value = "";
-    this.textInputRef.nativeElement.value = "";
-  }
 }
