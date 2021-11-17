@@ -61,7 +61,7 @@ export class ContactService {
     }); 
 
     return maxId
-  }
+  } 
 
   addContact(newContact: Contact) {
     if (newContact == null) {
