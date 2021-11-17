@@ -37,16 +37,17 @@ export class MessageEditComponent implements OnInit {
  
   onSubmit(form: NgForm) {
     const value = form.value;
+
     const newMessage = new Message(
       "",
-      value.name,
-      value.description,
-      value.url,
+      value.subject,
+      value.msgText,
+      "1",
     );
 
     this.messageService.addMessage(newMessage);
 
-    this.router.navigate(['/message']);
+    this.router.navigate(['/messages']);
   }
 
 }

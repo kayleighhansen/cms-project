@@ -1,21 +1,35 @@
 <div class="panel panel-default">
     <div class="panel-body">
-        <form id="document-edit">
+        <form id="document-edit" (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="row">
                 <div class="col-sm-12 form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" class="form-control" size="120" max="120" #subjectInput>
+                    <input type="text" 
+                            id="subject" 
+                            class="form-control" 
+                            size="120" 
+                            max="120" 
+                            name="subject"
+                            [ngModel]="message?.subject"
+                            #subjectInput="ngModel">
                 </div>
 
                 <div class="col-sm-12 form-group">
                     <label for="message">Message</label>
-                    <input type="text" id="msgText" class="form-control" max="255" size="120" #textInput>
+                    <input type="text" 
+                            id="msgText" 
+                            class="form-control" 
+                            max="255" 
+                            name="msgText"
+                            size="120" 
+                            [ngModel]="message?.msgText"
+                            #textInput>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" type="button" (click)="onSendMessage()">Send</button>
-                    <button class="btn btn-danger" type="button" (click)="onClear()">Clear</button>
+                    <button class="btn btn-success" type="button" (click)="onSubmit(f)">Send</button>
+                    <button class="btn btn-danger" type="button">Clear</button>
                 </div>
             </div>
         </form>

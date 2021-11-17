@@ -9,29 +9,33 @@ import { Subject } from 'rxjs';
 })
 export class MessageService {
 
-  private messages: Message[] = [];
-  maxMessageId:number;
-
-  messagesAdded = new EventEmitter<Message[]>();
+  messageSelectedEvent = new EventEmitter<Document>();
   messageListChanged = new Subject<Message[]>();
+  fetchMessagesEvent = new Subject<Message[]>();
 
-  constructor(private http: HttpClient) { 
-    this.messages = MOCKMESSAGES;
-  }
+  private messages: Message[] = [];
+  maxMessageId: number;
 
-  addMessage(message : Message) {
-    console.log(message);
-    this.messages.push(message);
-    this.messagesAdded.emit(this.messages.slice());
-  }
+  constructor(private http: HttpClient) { }
+
+  addMessage(newMessage : Message) {
+      if (newMessage == null) {
+        return;
+      }
+  
+      this.maxMessageId++;
+      newMessage.id = this.maxMessageId.toString();
+  
+      this.messages.push(newMessage);
+      const messagesListClone = this.messages.slice();
+      this.messageListChanged.next(messagesListClone);
+  
+      this.storeMessages();
+    }
 
   getMessage(id: string): Message {
     return this.messages.find((message) => message.id === id)
   } 
-
-  getMessages(): Message[] {
-    return this.messages.slice();
-  }
 
   getMaxId(): number {
     var maxId = 0
@@ -46,7 +50,7 @@ export class MessageService {
     return maxId
   } 
 
-  getContacts() {
+  getMessages() {
     this.http.get('https://cms-project-3527d-default-rtdb.firebaseio.com/messages.json').subscribe((result: any) => {
       this.messages = result;
       this.maxMessageId = this.getMaxId();
@@ -58,32 +62,19 @@ export class MessageService {
     );
   }
 
-  storeMessage() {
+  storeMessages() {
     let messages = JSON.stringify(this.messages);
+
+    console.log(messages);
 
     let messageHeader = new HttpHeaders({"Content-Type" : "application/json" });
 
-    this.http.put('https://cms-project-3527d-default-rtdb.firebaseio.com/contacts.json', messages, {headers: messageHeader})
+    this.http.put('https://cms-project-3527d-default-rtdb.firebaseio.com/messages.json', messages, {headers: messageHeader})
       .subscribe(
         () => {
           this.messageListChanged.next(this.messages.slice())
         }
       );
-  }
-
-  addContact(newMessage: Message) {
-    if (newMessage == null) {
-      return;
-    }
-
-    this.maxMessageId++;
-    newMessage.id = this.maxMessageId.toString();
-
-    this.messages.push(newMessage);
-    const messagesListClone = this.messages.slice();
-    this.messageListChanged.next(messagesListClone);
-
-    this.storeMessage();
   }
 
 }
